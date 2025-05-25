@@ -29,7 +29,7 @@ CREATE Table sightings(
     sighting_time TIMESTAMP WITHOUT TIME ZONE,
     location VARCHAR(50) NOT NULL,
     notes TEXT
-)
+);
 
 
 
@@ -51,17 +51,28 @@ INSERT INTO sightings(species_id, ranger_id, location, sighting_time, notes) VAL
 (1, 1, 'Hillview Post', '2024-05-09 06:20:00', 'Spotted near waterhole'),
 (2, 2, 'Dry Rock Area', '2024-05-13 15:45:00', 'Scales found on ground'),
 (3, 3, 'Open Grass Field', '2024-05-17 17:50:00', 'Seen during patrol'),
-(1, 2, 'Forest Edge Trail', '2024-05-20 19:10:00', 'Photographed from distance');
+(1, 2, 'Snowfall Pass', '2024-05-20 19:10:00', 'Photographed from distance');
 
 
 -- Problem Number 1 : Register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
 INSERT INTO rangers(name, region) VALUES
-('Derek Fox', 'Coastal Plains')
+('Derek Fox', 'Coastal Plains');
 
 
 
 -- Problem Number 2 : Count unique species ever sighted.
 SELECT count(DISTINCT species_id) AS unique_species_sighted FROM sightings;
+
+
+
+-- Problem Number 3 :  Find all sightings where the location includes "Pass".
+SELECT * FROM sightings WHERE "location" ILIKE '%Pass%';
+
+
+
+-- Problem Number 4 : List each ranger's name and their total number of sightings.
+
+
 
 SELECT * FROM rangers;
 SELECT * FROM species;
