@@ -8,7 +8,9 @@ CREATE Table rangers(
 );
 
 
-CREATE type thread_status AS ENUM ('Endangered', 'Vulnerable');
+
+
+CREATE type thread_status AS ENUM ('Endangered', 'Vulnerable', 'Historic');
 
 CREATE TABLE species(
     species_id SERIAL PRIMARY KEY NOT NULL,
@@ -19,6 +21,7 @@ CREATE TABLE species(
 );
 
 
+
 CREATE Table sightings(
     sighting_id SERIAL PRIMARY KEY NOT NULL,
     ranger_id INTEGER NOT NULL REFERENCES rangers(ranger_id),
@@ -27,3 +30,35 @@ CREATE Table sightings(
     location VARCHAR(50) NOT NULL,
     notes TEXT
 )
+
+
+
+-- Insert Table Data
+INSERT INTO rangers(name, region) VALUES
+('Emily Rose', 'Western Forest'),
+('Jake Carter', 'Savannah Border'),
+('Liam Wells', 'Highland Cliffs');
+
+
+INSERT INTO species(common_name, scientific_name, discovery_date, conservation_status) VALUES
+('Golden Langur', 'Trachypithecus geei', '1953-01-01', 'Endangered'),
+('Indian Pangolin', 'Manis crassicaudata', '1822-01-01', 'Vulnerable'),
+('Great Indian Bustard', 'Ardeotis nigriceps', '1861-01-01', 'Endangered'),
+('Nilgiri Marten', 'Martes gwatkinsii', '1832-01-01', 'Vulnerable');
+
+
+INSERT INTO sightings(species_id, ranger_id, location, sighting_time, notes) VALUES
+(1, 1, 'Hillview Post', '2024-05-09 06:20:00', 'Spotted near waterhole'),
+(2, 2, 'Dry Rock Area', '2024-05-13 15:45:00', 'Scales found on ground'),
+(3, 3, 'Open Grass Field', '2024-05-17 17:50:00', 'Seen during patrol'),
+(1, 2, 'Forest Edge Trail', '2024-05-20 19:10:00', 'Photographed from distance');
+
+
+-- problem number 1 : Register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
+INSERT INTO rangers(name, region) VALUES
+('Derek Fox', 'Coastal Plains')
+
+
+SELECT * FROM rangers;
+SELECT * FROM species;
+SELECT * FROM sightings;
