@@ -46,6 +46,9 @@ INSERT INTO species(common_name, scientific_name, discovery_date, conservation_s
 ('Great Indian Bustard', 'Ardeotis nigriceps', '1861-01-01', 'Endangered'),
 ('Nilgiri Marten', 'Martes gwatkinsii', '1832-01-01', 'Vulnerable');
 
+INSERT INTO species(common_name, scientific_name, discovery_date, conservation_status)
+VALUES ('Ancient Tortoise', 'Testudo antiquus', '1750-06-01', 'Endangered');
+
 
 INSERT INTO sightings(species_id, ranger_id, location, sighting_time, notes) VALUES
 (1, 1, 'Hillview Post', '2024-05-09 06:20:00', 'Spotted near waterhole'),
@@ -84,6 +87,19 @@ LEFT JOIN sightings ON species.species_id = sightings.species_id
 WHERE sightings.sighting_id IS NULL;
 
 
+
+-- Problem Number 6 : Show the most recent 2 sightings.
+SELECT species.common_name, sightings.sighting_time, rangers.name FROM sightings
+JOIN species ON sightings.species_id = species.species_id
+JOIN rangers ON sightings.ranger_id = rangers.ranger_id
+ORDER BY sightings.sighting_time DESC
+LIMIT 2;
+
+
+
+-- Problem Number 7 : Update all species discovered before year 1800 to have status 'Historic'.
+UPDATE species SET conservation_status = 'Historic'
+WHERE discovery_date < '1800-01-01';
 
 
 
